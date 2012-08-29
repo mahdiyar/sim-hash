@@ -18,6 +18,8 @@
 
 (def sha1 (partial to-hash "sha1"))
 
+;; http://en.wikipedia.org/wiki/Hamming_distance
+
 (defn hamming-distance
   ^{:doc "Measures the minimum number of substitutions required to
    change one string into the other, or the number of errors
