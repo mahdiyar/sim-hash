@@ -17,7 +17,6 @@
 ;; Partial functions
 
 (def md5 (partial to-hash "md5"))
-
 (def sha1 (partial to-hash "sha1"))
 
 ;; http://en.wikipedia.org/wiki/Hamming_distance

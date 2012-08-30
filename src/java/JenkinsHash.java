@@ -1,28 +1,17 @@
 public class JenkinsHash {
 
-    public JenkinsHash() {}
+    public JenkinsHash() {
+    }
 
-    /**
-     * Returns a 64-bit hash value.
-     * 
-     * @return 64-bit hash value
-     */
     public long hash64(byte[] input) {
         int pc = 0;
         int pb = 0;
-
         return hash(input, input.length, pc, pb, false);
     }
 
-    /**
-     * Returns a 32-bit hash value.
-     * 
-     * @return 32-bit hash value
-     */
     public int hash32(byte[] input) {
         int pc = 0;
         int pb = 0;
-
         return (int) hash(input, input.length, pc, pb, true);
     }
 
@@ -38,7 +27,6 @@ public class JenkinsHash {
      */
     private long hash(byte[] k, int length, int pc, int pb, boolean is32BitHash) {
         int a, b, c;
-
         a = b = c = 0xdeadbeef + length + pc;
         c += pb;
 
@@ -57,7 +45,6 @@ public class JenkinsHash {
             c += k[offset + 10] << 16;
             c += k[offset + 11] << 24;
 
-            // mix(a, b, c);
             a -= c;
             a ^= rot(c, 4);
             c += b;
@@ -132,6 +119,5 @@ public class JenkinsHash {
 
     long rot(int x, int distance) {
         return (x << distance) | (x >> (32 - distance));
-        // return (x << distance) | (x >>> -distance);
     }
 }
