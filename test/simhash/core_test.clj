@@ -2,6 +2,11 @@
   (:use clojure.test
         simhash.core))
 
+(deftest hamming-distance-test
+  (testing "hamming distance with strings"
+    (is (= 1 (hamming-distance "cat" "can")))
+    (is (= 2 (hamming-distance "cat" "cry")))))
+     
 (deftest md5-test
   (testing "Hashing strings with MD5"
     (let [test-string "The quick brown fox jumps over the lazy dog"]
