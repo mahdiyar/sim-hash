@@ -1,5 +1,7 @@
-(ns simhash.core)
-
+(ns simhash.core
+  (:import [java.security MessageDigest])
+  (:import [JenkinsHash]))
+                                      
 ;; Algorithm utils 
 
 (defn- to-hash
@@ -23,7 +25,11 @@
 (def bool->int
   (fn [^java.lang.Boolean b]
     (if (false? b) 1 0)))
-                            
+
+(defn jenkins-hash [^String s]
+  (let [bytes (.getBytes s)]
+    (JenkinsHash.)))
+
 (defn hamming-distance
   ^{:doc "Measures the minimum number of substitutions required to
    change one string into the other, or the number of errors
@@ -36,5 +42,11 @@
     (let [char-map (zip s1, s2)]
       (reduce + 
         (map #(bool->int %)
-          (map (fn [[a b]] (= a b)) char-map)))))))
-                                             
+             (map (fn [[a b]] (= a b)) char-map)))))))
+
+(defn sim-hash [^String s]
+  (let [words (clojure.string/split s #"\W+")
+        features (map #(.toLowerCase %) words)]
+    (map #(md5 %) features)))
+
+
